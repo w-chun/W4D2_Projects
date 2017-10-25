@@ -1,0 +1,46 @@
+
+<%  if action == :edit %>
+  <% action_url= cat_url(cat) %>
+  <% header = "edit" %>
+<% else %>
+  <% action_url= cats_url %>
+  <% header = "create" %>
+
+<% end %>
+
+<h1> <%= header %> </h1>
+
+<form action='<%= action_url %>' method="post">
+
+  <% if action == :edit  %>
+  <input type='hidden' name='_method' value='PATCH'>
+  <% end %>
+
+name <br>
+<input type='text' name='cat[name]' value= '<%= cat.name %>' >
+
+
+<br>sex <br>
+  <input type="radio" name ="cat[sex]" value="m" > Male<br>
+  <input type="radio" name ="cat[sex]" value="f"> Female<br>
+
+
+<br>Color <br>
+  <select name="cat[color]">
+    <option value='<%= cat.color %>' disabled='disabled'>choose a color</option>
+
+    <option   value="white">white</option>
+    <option  value="black">black</option>
+    <option  value="grey">grey</option>
+    <option  value="orange">orange</option>
+  </select>
+
+<br>birthdate <br>
+  <input name='cat[birth_date]'  type="date" value='<%= cat.birth_date %>'>
+
+
+<br>description <br>
+  <input type='text' name='cat[description]' value= '<%= cat.description %>'>
+
+  <input type="submit" value= "<%= action==:edit ? "update cat" : "add cat"  %>" >
+</form>
